@@ -1,4 +1,16 @@
+require 'httparty'
+
 module Jekyll
+
+  class Gfm
+    include ::HTTParty
+    base_uri 'api.github.com:443'
+    headers({"Content-type" => "text/plain"})
+
+    def convert(content)
+      self.class.post('/markdown/raw', {:body => content})
+    end
+  end
 
   class MarkdownConverter < Converter
     safe true
@@ -67,6 +79,8 @@ module Jekyll
             STDERR.puts '  $ [sudo] gem install maruku'
             raise FatalException.new("Missing dependency: maruku")
           end
+        when 'gfm'
+          @gfm = Gfm.new
         else
           STDERR.puts "Invalid Markdown processor: #{@config['markdown']}"
           STDERR.puts "  Valid options are [ maruku | rdiscount | kramdown ]"
@@ -125,6 +139,8 @@ module Jekyll
           html
         when 'maruku'
           Maruku.new(content).to_html
+        when 'gfm'
+          Gfm.new.convert(content)
       end
     end
   end

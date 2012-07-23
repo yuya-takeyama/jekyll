@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('maruku', "~> 0.5")
   s.add_runtime_dependency('kramdown', "~> 0.13.4")
   s.add_runtime_dependency('pygments.rb', "~> 0.2.12")
+  s.add_runtime_dependency('httparty', "~> 0.8.3")
 
   s.add_development_dependency('rake', "~> 0.9")
   s.add_development_dependency('rdoc', "~> 3.11")
