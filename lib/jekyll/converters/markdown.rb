@@ -83,7 +83,7 @@ module Jekyll
           @gfm = Gfm.new
         else
           STDERR.puts "Invalid Markdown processor: #{@config['markdown']}"
-          STDERR.puts "  Valid options are [ maruku | rdiscount | kramdown ]"
+          STDERR.puts "  Valid options are [ maruku | rdiscount | kramdown | gfm ]"
           raise FatalException.new("Invalid Markdown process: #{@config['markdown']}")
       end
       @setup = true
